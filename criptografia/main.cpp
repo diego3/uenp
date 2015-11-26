@@ -43,6 +43,7 @@ int main() {
                 printText(HANDLED_FILE);
                 break;
         }
+
     }
 
     return 0;
@@ -67,12 +68,50 @@ void encodeText(const char *fileName) {
     int middle = 0;
     vector<string> message = openFile(fileName);
 
+    string part1;
+    string part2;
+    int messageLen = 0;
+    for(unsigned int i=0; i < message.size(); i++) {
+        string aux = message[i];
 
+        messageLen += aux.size();
+
+        middle = aux.size()  / 2;
+        for(unsigned int j = 0; j < aux.size(); j++) {
+            //cout << aux[j] << "\n";
+            if(j <= middle) {
+                part1.push_back(aux[j]);
+            }else {
+                part2.push_back(aux[j]);
+            }
+        }
+    }
+
+    //cout << "part1 = " << part1 << " size = " << part1.size() << endl;
+    //cout << "part2 = " << part2 << " size = " << part2.size() << endl;
+    string cript;
+    int a = 0;
+    int b = 0;
+    for(int j = 0; j < messageLen; j++) {//7,  0 1 2 3 4 5 6
+
+        if( (j & 2) == 0) {
+            cript.push_back(part1[a]);
+            a++;
+        }
+        else {
+            cript.push_back(part2[b]);
+            b++;
+        }
+    }
+
+    cout << "cript = " << cript << endl;
+
+    /*
     ofstream file;
     file.open(fileName, ios::trunc | ios::out);
 
 
-    file.close();
+    file.close();*/
 }
 
 void decodeText(const char *fileName) {
