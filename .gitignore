@@ -1,0 +1,9 @@
+tmp/
+logs/
+/.idea
+build/coverage
+build/logs
+cache.properties
+*local.php
+*local.ini
+/bin
